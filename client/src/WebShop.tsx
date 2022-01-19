@@ -1,12 +1,12 @@
 import React from 'react';
-import './App.css';
+import './WebShop.css';
 
-function App() {
+function WebShop() {
   return (
-    <div className="App">
+    <div className="WebShop">
 
     </div>
   );
 }
 
-export default App;
+export default WebShop;
