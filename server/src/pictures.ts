@@ -1,6 +1,6 @@
 import { v5 as uuid } from "uuid";
 
-type picture = {
+type Picture = {
   id: string;
   artist: string;
   thumbnailUrl: string;
@@ -8,7 +8,7 @@ type picture = {
   price: number;
 };
 
-export const pictures: picture[] = [
+export const pictures: Picture[] = [
   {
     id: uuid(
       "https://picon.ngfiles.com/760000/flash_760243_largest_crop.png?f1600891340",
@@ -124,6 +124,12 @@ export type PicturesQueryParams = {
   id?: string;
 };
 
+export type PicturesResponseBody = {
+  pages: number;
+  page: number;
+  pictures: Picture[];
+}
+
 export const getPictures = ({
   page,
   perPage,
@@ -131,7 +137,7 @@ export const getPictures = ({
   minPrice,
   maxPrice,
   id,
-}: PicturesQueryParams) => {
+}: PicturesQueryParams): PicturesResponseBody => {
   const filteredPictures = pictures.filter(
     (picture) =>
       picture.id === (id ? id : picture.id) &&
