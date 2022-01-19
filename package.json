@@ -1,7 +1,15 @@
 {
     "name": "webshop",
+    "scripts": {
+        "start": "run-p start:client start:server",
+        "start:client": "npm run start --workspace=client",
+        "start:server": "npm run start --workspace=server"
+    },
     "workspaces": [
-      "client",
-      "server"
-    ]
-  }
+        "client",
+        "server"
+    ],
+    "dependencies": {
+        "npm-run-all": "^4.1.5"
+    }
+}
