@@ -2,18 +2,19 @@ import React from 'react';
 import './WebShop.css';
 import {useRouteMatch, Switch, Route} from 'react-router-dom'; 
 import Picture from './components/Picture/Picture'; 
+import Pictures from './components/Pictures/Pictures'
 ;
 
 
 function WebShop() {
 
-  const { path, url } = useRouteMatch();
   return (
     <div className="WebShop">
-      WebShop 
+      Hello 
       <Switch>
-        <Route path="/picture/:id">
-        <Picture />
+        <Route path="/" > 
+        <Pictures />
+       
         </Route>
       </Switch>
     </div>
