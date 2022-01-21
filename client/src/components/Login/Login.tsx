@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../UserContext/UserContext";
 
-const Login = ({ redirectUrl }: { redirectUrl?: string }) => {
+const Login = ({ redirectUrl, onClose }: { redirectUrl?: string, onClose: () => {} }) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isWrongLogin, setIsWrongLogin] = useState(false);
@@ -30,6 +30,7 @@ const Login = ({ redirectUrl }: { redirectUrl?: string }) => {
   };
   return (
     <div className="Login">
+
       <form action="/login" method="post" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username</label>
@@ -60,6 +61,9 @@ const Login = ({ redirectUrl }: { redirectUrl?: string }) => {
         </strong>
         <div>
           <button type="submit">Sign in</button>
+        </div>
+        <div>
+          <button type="button" onClick={onClose}>Close</button>
         </div>
       </form>
     </div>
