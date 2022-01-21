@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Picture = () => {
+const Picture = ({thumbnailUrl}) => {
     return ( 
-        <div>Picture</div>
+        <div><img src={thumbnailUrl} /></div>
      );
 }
  
