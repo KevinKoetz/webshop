@@ -15,10 +15,6 @@ ReactDOM.render(
         <Switch>
           <Route path="/">
             <WebShop />
-            <Route path="/login">
-              <Login />
-              <LogoutButton />
-            </Route>
           </Route>
         </Switch>
       </Router>
