@@ -24,14 +24,10 @@ declare namespace Express {
     invoice?: InvoiceDetails;
     payment?: PaymentDetails;
   }
-  export interface User {
+  export interface User extends UserDetails{
     id: string;
     username: string;
     password: string; //storing plain password here, do not ever Ever do this at home!!!
-    profile?: ProfileDetails;
-    art?: string[];
-    invoice?: InvoiceDetails;
-    payment?: PaymentDetails;
   }
   
 }
