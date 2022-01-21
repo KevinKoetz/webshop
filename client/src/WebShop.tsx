@@ -3,16 +3,15 @@ import './WebShop.css';
 import {useRouteMatch, Switch, Route} from 'react-router-dom'; 
 import Picture from './components/Picture/Picture'; 
 import Pictures from './components/Pictures/Pictures';
-import NavBar from './components/NavBar/NavBar';
-;
+import Header from './components/Header/Header';
 
 
 function WebShop() {
 
   return (
     <div className="WebShop">
-      Hello 
-      <NavBar /> 
+   
+      <Header /> 
       <Switch>
         <Route path="/" > 
         <Pictures />    
