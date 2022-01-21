@@ -7,7 +7,6 @@ import Header from './components/Header/Header';
 
 
 function WebShop() {
-
   return (
     <div className="WebShop">
    
@@ -21,4 +20,4 @@ function WebShop() {
   );
 }
 
-export default WebShop; 
+export default WebShop;
