@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
+import { Redirect } from "react-router-dom";
 import { UserContext } from "../UserContext/UserContext";
+import "./Login.css";
 
-const Login = ({ redirectUrl }: { redirectUrl?: string }) => {
+const Login = ({ redirectOnAuthenticateUrl }: { redirectOnAuthenticateUrl: string }) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isWrongLogin, setIsWrongLogin] = useState(false);
@@ -17,20 +19,19 @@ const Login = ({ redirectUrl }: { redirectUrl?: string }) => {
         body: JSON.stringify({ username, password }),
         headers: { "Content-Type": "application/json" },
       });
-  
+
       if (response.ok) {
         setUserState({ isAuthenticated: true, username });
+        setIsWrongLogin(false);
       } else {
         setIsWrongLogin(true);
       }
-    } catch (error) {
-      
-    }
-    
+    } catch (error) {}
   };
   return (
     <div className="Login">
-      <form action="/login" method="post" onSubmit={handleSubmit}>
+      {userState.isAuthenticated ? <Redirect to={redirectOnAuthenticateUrl}/> : 
+      (<form action="/login" method="post" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username</label>
           <input
@@ -61,7 +62,8 @@ const Login = ({ redirectUrl }: { redirectUrl?: string }) => {
         <div>
           <button type="submit">Sign in</button>
         </div>
-      </form>
+      </form>)
+      }
     </div>
   );
 };
