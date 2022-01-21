@@ -1,0 +1,33 @@
+.PicturePreview {
+  background-color: #8bd9ed;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.PicturePreview img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+}
+
+.PicturePreview div {
+  padding: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.PicturePreview div span {
+  white-space: nowrap;
+}
+
+.PicturePreview figure {
+  padding: 0;
+  margin: 0;
+  height: 50%;
+  flex-grow: 1;
+}
+
+
