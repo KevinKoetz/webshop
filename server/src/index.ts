@@ -1,3 +1,7 @@
+/**ONLY MEANT FOR LOCAL TESTING
+ * USER PASSWORDS ARE STORED IN PLAIN TEXT ON PURPOSE
+ */
+
 import express from "express";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
@@ -12,7 +16,7 @@ const port = 5000;
 passport.serializeUser((user, done) => {
   console.log("Inside serialize User");
   console.log(user);
-  
+
   done(null, user.id);
 });
 
@@ -43,7 +47,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static("public"));
-app.use(session({ secret: "Bubbleblossom", saveUninitialized: false, }));
+app.use(session({ secret: "Bubbleblossom", saveUninitialized: false, resave: false}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -53,29 +57,44 @@ app.get("/pictures", (req, res) => {
   res.send(JSON.stringify(getPictures(params)));
 });
 
-app.post(
-  "/login",
-  passport.authenticate("local"),
-  (req, res) => {
-    console.log(req.user);
-    console.log("got here!");
-    res.set("ok", "true")
-    res.send()
-  }
-);
+app.post("/login", passport.authenticate("local"), (req, res) => {
+  console.log(req.user);
+  console.log("got here!");
+  res.set("ok", "true");
+  res.send();
+});
 
 app.post("/logout", (req, res) => {
-  req.logOut()
-  res.set("ok", "true")
-  res.send()
-})
+  req.logOut();
+  res.set("ok", "true").send();
+});
+
+app.get("/account/:username/:details", (req, res) => {
+  console.log(req.params);
+
+  if (!req.isAuthenticated() || !req.user) {
+    res.set("ok", "false").sendStatus(401);
+    return;
+  }
+  const { username, details } = req.params;
+  if (username !== req.user.username) {
+    res.set("ok", "false").sendStatus(401);
+    return;
+  }
+
+  if (details === "profile" || details === "art" || details === "invoice" || details === "payment"){
+    res.send(JSON.stringify(req.user[details]));
+  }
+  
+});
 
 app.get("/needsAuth", (req, res) => {
   console.log(req.isAuthenticated());
   console.log(req.user);
-  res.set("ok", String(req.isAuthenticated())).send(String(req.isAuthenticated()))
-})
-
+  res
+    .set("ok", String(req.isAuthenticated()))
+    .send(String(req.isAuthenticated()));
+});
 
 app.listen(port, () => {
   console.log(`App listening on Port ${port}`);

@@ -7,7 +7,7 @@ export interface IUser {
 }
 
 
-const users: IUser[] = [{
+const users: Express.User[] = [{
     id: uuid(),
     username: "Kevin",
     password: "password"
@@ -22,4 +22,12 @@ export const getUserByNameAndPassword = (username: string, password: string) => 
 
 export const getUserById = (id: string) => {
     return users.find(user => user.id === id)
+}
+
+export const createUser = (username: string, password: string) => {
+    users.push({id: uuid(), username, password})
+}
+
+export const updateUserDetails = (detail: keyof Express.UserDetails, payload: Express.UserDetails[typeof detail]) => {
+
 }
