@@ -1,0 +1,31 @@
+.header {
+
+    display: flex;
+    justify-content: space-between;  
+    margin-bottom: 10px; 
+    background-color: #8bd9ed;  
+ 
+ 
+
+}
+.logo img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;  
+    margin: 0;
+    padding: 0; 
+    
+}
+.logo {
+    width: 15rem; 
+    height: fit-content; 
+    border: yellow 2px solid;
+    align-self: center; 
+
+}
+
+.menu {
+   width: 100%;
+    list-style: none;  
+    justify-content:space-evenly; 
+}
