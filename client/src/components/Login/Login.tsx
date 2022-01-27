@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { UserContext } from "../UserContext/UserContext";
 import "./Login.css";
 
-const Login = ({ redirectOnAuthenticateUrl, onClose }: { redirectOnAuthenticateUrl: string, onClose: () => {} }) => {
+const Login = ({ redirectOnAuthenticateUrl, onClose }: { redirectOnAuthenticateUrl: string, onClose: () => void }) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isWrongLogin, setIsWrongLogin] = useState(false);
