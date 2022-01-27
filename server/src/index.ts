@@ -9,6 +9,7 @@ import { parsePictureQueryParams, getPictures } from "./pictures";
 import { getUserByNameAndPassword, getUserById, IUser } from "./users";
 import session from "express-session";
 import bodyParser from "body-parser";
+import { Readable } from "stream";
 
 const app = express();
 const port = 5000;
@@ -39,15 +40,17 @@ const strategy = new LocalStrategy((username, password, done) => {
 
 passport.use(strategy);
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+ app.use(express.urlencoded());
+app.use(express.json()); 
 app.use((req, res, next) => {
   console.log("inside first middleware");
   console.log("Body is", req.body);
   next();
 });
 app.use(express.static("public"));
-app.use(session({ secret: "Bubbleblossom", saveUninitialized: false, resave: false}));
+app.use(
+  session({ secret: "Bubbleblossom", saveUninitialized: false, resave: false })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -82,10 +85,14 @@ app.get("/account/:username/:details", (req, res) => {
     return;
   }
 
-  if (details === "profile" || details === "art" || details === "invoice" || details === "payment"){
+  if (
+    details === "profile" ||
+    details === "art" ||
+    details === "invoice" ||
+    details === "payment"
+  ) {
     res.send(JSON.stringify(req.user[details]));
   }
-  
 });
 
 app.get("/needsAuth", (req, res) => {
