@@ -10,7 +10,11 @@ export interface IUser {
 const users: Express.User[] = [{
     id: uuid(),
     username: "Kevin",
-    password: "password"
+    password: "password",
+    profile: {aboutMe: "Super Special Guy..."},
+    invoice: {fullName: "Kevin Kötz", streetWithNumber:"Anywhere 10", postCode: "06114", country: "Germany"},
+    payment: {fullName: "Kevin Kötz", bic:"INGEFXX", iban:"DE0640987946349", bank:"ING"},
+    art: []
 }]
 
 export const getUserByNameAndPassword = (username: string, password: string) => {
@@ -25,7 +29,10 @@ export const getUserById = (id: string) => {
 }
 
 export const createUser = (username: string, password: string) => {
-    users.push({id: uuid(), username, password})
+    if(users.find(user => user.username === username)) return null
+    const newUser = {id: uuid(), username, password}
+    users.push(newUser)
+    return newUser;
 }
 
 export const updateUserDetails = (detail: keyof Express.UserDetails, payload: Express.UserDetails[typeof detail]) => {
